@@ -42,6 +42,30 @@ class MyApplication : Application() {
         if (a == 7) {
             return 7
         }
+        if (a == 8) {
+            return 8
+        }
+        if (a == 9) {
+            return 9
+        }
+        if (a == 10) {
+            return 10
+        }
+        if (a == 11) {
+            return 11
+        }
+        if (a == 12) {
+            return 12
+        }
+        if (a == 13) {
+            return 13
+        }
+        if (a == 14) {
+            return 14
+        }
+        if (a == 15) {
+            return 15
+        }
         return 0
     }
 }
