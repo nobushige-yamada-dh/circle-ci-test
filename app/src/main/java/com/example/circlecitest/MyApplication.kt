@@ -20,6 +20,9 @@ class MyApplication : Application() {
             .build()
     }
 
+    /**
+     * 
+     */
     fun forCyclomaticComplexity(a: Int): Int {
         if (a == 1) {
             return 1
