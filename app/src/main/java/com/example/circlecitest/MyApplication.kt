@@ -72,6 +72,9 @@ class MyApplication : Application() {
         if (a == 16) {
             return 16
         }
+        if (a == 17) {
+            return 17
+        }
         return 0
     }
 }
