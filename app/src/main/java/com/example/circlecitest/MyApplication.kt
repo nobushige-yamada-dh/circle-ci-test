@@ -63,6 +63,7 @@ class MyApplication : Application() {
         if (a == 14) {
             return 14
         }
+        /*
         if (a == 15) {
             return 15
         }
@@ -72,6 +73,7 @@ class MyApplication : Application() {
         if (a == 17) {
             return 17
         }
+        */
         return 0
     }
 }
