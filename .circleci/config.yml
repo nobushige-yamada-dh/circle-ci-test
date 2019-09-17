@@ -30,6 +30,9 @@ jobs:
           destination: reports
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: app/build/test-results
+      - sonar_qube:
+          name: Run SonarQube
+          command: bash ./.circleci/sonarqube.sh
       - run:
           name: Build apk
           command: |
