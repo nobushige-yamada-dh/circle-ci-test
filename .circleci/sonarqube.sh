@@ -11,8 +11,14 @@ SRC_DIR='./app/src/main/java'
 wget -P ${HOME} -N ${SONAR_SCANNER_URL}
 unzip -d ${HOME} ${HOME}/${SONAR_SCANNER_FILE_NAME}
 
-${SONAR_SCANNER_DIR}/bin/sonar-scanner \
-  -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
-  -Dsonar.sources=${SRC_DIR} \
-  -Dsonar.host.url=${SONAR_HOST_URL} \
-  -Dsonar.login=${SONAR_TOKEN}
+
+if [ -n "${CI_PULL_REQUEST}" ]; then
+  ${SONAR_SCANNER_DIR}/bin/sonar-scanner \
+    -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
+    -Dsonar.sources=${SRC_DIR} \
+    -Dsonar.host.url=${SONAR_HOST_URL} \
+    -Dsonar.login=${SONAR_TOKEN} \
+    -Dsonar.github.repository=${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} \
+    -Dsonar.github.pullRequest=${CI_PULL_REQUEST##*/} \
+    -Dsonar.github.oauth=${GITHUB_TOKEN}
+fi
