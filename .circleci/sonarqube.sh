@@ -3,7 +3,7 @@
 SONAR_SCANNER_VERSION='4.0.0.1744'
 SONAR_SCANNER_URL="https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONAR_SCANNER_VERSION}-linux.zip"
 SONAR_SCANNER_FILE_NAME=$(basename ${SONAR_SCANNER_URL})
-SONAR_SCANNER_DIR="${HOME}/sonner-scaner-${SONAR_SCANNER_VERSION}-linux"
+SONAR_SCANNER_DIR="${HOME}/sonar-scanner-${SONAR_SCANNER_VERSION}-linux"
 SONAR_PROJECT_KEY='circle-ci-test'
 SONAR_HOST_URL='http://ec2-54-248-68-225.ap-northeast-1.compute.amazonaws.com:9000'
 SRC_DIR='./app/src/main/java'
