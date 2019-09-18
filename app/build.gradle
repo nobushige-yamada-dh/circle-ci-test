@@ -37,44 +37,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 }
 
-// Lifecycle
-dependencies {
-    def lifecycle_version = '2.1.0'
-
-    // ViewModel and LiveData
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-    // alternatively - just ViewModel
-    //implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version" // For Kotlin use lifecycle-viewmodel-ktx
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    // alternatively - just LiveData
-    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
-    // alternatively - Lifecycles only (no ViewModel or LiveData). Some UI
-    //     AndroidX libraries use this lightweight import for Lifecycle
-    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
-
-    //annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version" // For Kotlin use kapt instead of annotationProcessor
-    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
-    // alternately - if using Java8, use the following instead of lifecycle-compiler
-    //implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
-
-    // optional - ReactiveStreams support for LiveData
-    //implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version" // For Kotlin use lifecycle-reactivestreams-ktx
-    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
-
-    // optional - Test helpers for LiveData
-    testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
-}
-
-// Dagger2
-dependencies {
-    def dagger_version = '2.24'
-
-    implementation "com.google.dagger:dagger-android:$dagger_version"
-    implementation "com.google.dagger:dagger-android-support:$dagger_version"
-    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
-}
-
 // JUnit
 dependencies {
     testImplementation 'junit:junit:4.12'
@@ -115,4 +77,62 @@ dependencies {
     // dependency to appear on your APK's compile classpath or the test APK
     // classpath.
     androidTestImplementation "androidx.test.espresso:espresso-idling-resource:$espresso_version"
+}
+
+// Lifecycle
+dependencies {
+    def lifecycle_version = '2.1.0'
+
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    // alternatively - just ViewModel
+    //implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version" // For Kotlin use lifecycle-viewmodel-ktx
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    // alternatively - just LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+    // alternatively - Lifecycles only (no ViewModel or LiveData). Some UI
+    //     AndroidX libraries use this lightweight import for Lifecycle
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+
+    //annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version" // For Kotlin use kapt instead of annotationProcessor
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    // alternately - if using Java8, use the following instead of lifecycle-compiler
+    //implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+
+    // optional - ReactiveStreams support for LiveData
+    //implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version" // For Kotlin use lifecycle-reactivestreams-ktx
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
+
+    // optional - Test helpers for LiveData
+    testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
+}
+
+// Dagger2
+dependencies {
+    def dagger_version = '2.24'
+
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+}
+
+// Room
+dependencies {
+    def room_version = "2.2.0-rc01"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+
+    // optional - RxJava support for Room
+    implementation "androidx.room:room-rxjava2:$room_version"
+
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation "androidx.room:room-guava:$room_version"
+
+    // Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
 }
