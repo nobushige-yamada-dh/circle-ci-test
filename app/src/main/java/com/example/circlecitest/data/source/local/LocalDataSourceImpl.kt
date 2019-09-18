@@ -8,7 +8,7 @@ class LocalDataSourceImpl private constructor(
         private val app: MyApplication
 ): LocalDataSource {
 
-    private val appExecutors = AppExecutors()
+    private val appExecutors = AppExecutors.getInstance()
     private val mainDb = MainDatabase.getInstance(app)
 
     override fun getAllGameApps(callback: (List<GameApp>) -> Unit) {
