@@ -2,6 +2,7 @@ package com.example.circlecitest.di
 
 import com.example.circlecitest.MyApplication
 import com.example.circlecitest.ViewModelFactory
+import com.example.circlecitest.data.source.MainRepositoryImpl
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -27,8 +28,6 @@ interface AppComponent: AndroidInjector<MyApplication> {
         fun appModule(appModule: AppModule): Builder
     }
 
-    /**
-     *
-     */
     fun inject(viewModelFactory: ViewModelFactory)
+    fun inject(mainRepositoryImpl: MainRepositoryImpl)
 }

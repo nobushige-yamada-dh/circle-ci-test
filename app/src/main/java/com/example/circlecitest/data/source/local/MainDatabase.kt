@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase
 import com.example.circlecitest.MyApplication
 import com.example.circlecitest.data.GameApp
 
-@Database(entities = arrayOf(GameApp::class), version = 1)
+@Database(entities = arrayOf(GameApp::class), version = 1, exportSchema = false)
 abstract class MainDatabase: RoomDatabase() {
 
     abstract fun gameAppsDao(): GameAppsDao
