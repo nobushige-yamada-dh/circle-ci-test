@@ -15,7 +15,9 @@ import com.example.circlecitest.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
- *
+ * This is minimum code for Activity.
+ * You MUST NOT write any logic here. The logic MUST be written in ViewModel.
+ * You MUST keep it.
  */
 class MainActivity : AppCompatActivity() {
 
