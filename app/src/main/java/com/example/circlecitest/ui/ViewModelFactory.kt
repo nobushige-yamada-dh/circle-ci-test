@@ -1,9 +1,10 @@
-package com.example.circlecitest
+package com.example.circlecitest.ui
 
 import android.annotation.SuppressLint
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.circlecitest.MyApplication
 import com.example.circlecitest.data.source.MainRepository
 import com.example.circlecitest.ui.main.MainViewModel
 import javax.inject.Inject

@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.example.circlecitest.MyApplication
 import com.example.circlecitest.R
-import com.example.circlecitest.ViewModelFactory
+import com.example.circlecitest.ui.ViewModelFactory
 import com.example.circlecitest.databinding.ActivityMainBinding
 
 import kotlinx.android.synthetic.main.activity_main.*

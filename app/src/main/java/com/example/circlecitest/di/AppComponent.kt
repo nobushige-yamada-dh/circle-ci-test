@@ -1,7 +1,7 @@
 package com.example.circlecitest.di
 
 import com.example.circlecitest.MyApplication
-import com.example.circlecitest.ViewModelFactory
+import com.example.circlecitest.ui.ViewModelFactory
 import com.example.circlecitest.data.source.MainRepositoryImpl
 import dagger.BindsInstance
 import dagger.Component
