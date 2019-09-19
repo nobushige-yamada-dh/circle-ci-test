@@ -1,5 +1,7 @@
 package com.example.circlecitest.data.source
 
+import androidx.annotation.VisibleForTesting
+import com.example.circlecitest.data.GameApp
 import com.example.circlecitest.data.source.local.LocalDataSource
 
 /**
@@ -16,6 +18,8 @@ class AppRepositoryImpl private constructor(
 
     var name = "me"
 
+    override fun getAllGameApps(callback: (List<GameApp>) -> Unit) = localDataSource.getAllGameApps(callback)
+
     companion object {
 
         @Volatile private var INSTANCE: AppRepositoryImpl? = null
@@ -26,5 +30,10 @@ class AppRepositoryImpl private constructor(
                         INSTANCE = it
                     }
                 }
+
+        @VisibleForTesting
+        fun destroyInstance() {
+            INSTANCE = null
+        }
     }
 }

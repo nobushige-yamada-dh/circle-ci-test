@@ -12,4 +12,6 @@ import com.example.circlecitest.data.source.AppRepository
 class MainViewModel(
         private val appRepository: AppRepository
 ) : ViewModel() {
+
+    fun doSomething(): String = "Did something"
 }
