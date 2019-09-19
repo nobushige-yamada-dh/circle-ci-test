@@ -4,16 +4,21 @@ import com.example.circlecitest.MyApplication
 import com.example.circlecitest.data.GameApp
 import com.example.circlecitest.util.AppExecutors
 
+/**
+ * This is an implementation of database access.
+ * This class MUST be kept simple, it SHOULD NOT include logic.
+ * The logic SHOULD be written in AppRepositoryImpl.
+ */
 class LocalDataSourceImpl private constructor(
         private val app: MyApplication
 ): LocalDataSource {
 
     private val appExecutors = AppExecutors.getInstance()
-    private val mainDb = AppDatabase.getInstance(app)
+    private val appDb = AppDatabase.getInstance(app)
 
     override fun getAllGameApps(callback: (List<GameApp>) -> Unit) {
         appExecutors.diskIO.execute {
-            mainDb.gameAppsDao().getAll().also {
+            appDb.gameAppsDao().getAll().also {
                 appExecutors.mainThread.execute {
                     callback(it)
                 }
