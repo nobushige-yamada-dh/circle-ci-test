@@ -81,10 +81,11 @@ dependencies {
 
 // Mockito
 dependencies {
+    def mockito_kotlin_version = '2.2.0'
     def mockito_version = '1.10.19'
     def dexmaker_version = '1.2'
 
-    testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version"
     androidTestImplementation "org.mockito:mockito-core:$mockito_version"
     androidTestImplementation "com.google.dexmaker:dexmaker:$dexmaker_version"
     androidTestImplementation "com.google.dexmaker:dexmaker-mockito:$dexmaker_version"

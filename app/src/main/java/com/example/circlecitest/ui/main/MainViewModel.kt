@@ -1,5 +1,7 @@
 package com.example.circlecitest.ui.main
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.circlecitest.data.source.AppRepository
 
@@ -15,5 +17,16 @@ class MainViewModel(
         private val appRepository: AppRepository
 ) : ViewModel() {
 
+    enum class Message {
+        NO_MESSAGE,
+        FAB_PUSHED
+    }
+
+    val snackBarMessage = MutableLiveData<Message>(Message.NO_MESSAGE)
+
     fun doSomething(): String = "Did something"
+
+    fun onClickFab() {
+        snackBarMessage.value = Message.FAB_PUSHED
+    }
 }

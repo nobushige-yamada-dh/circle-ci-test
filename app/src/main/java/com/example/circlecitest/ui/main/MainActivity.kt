@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.circlecitest.MyApplication
 import com.example.circlecitest.R
@@ -35,9 +36,13 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         setupViewFragment()
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        viewModel.snackBarMessage.apply {
+            observe(this@MainActivity, Observer {
+                if (it != MainViewModel.Message.NO_MESSAGE) {
+                    value = MainViewModel.Message.NO_MESSAGE
+                    Snackbar.make(fab, it.name, Snackbar.LENGTH_LONG).show()
+                }
+            })
         }
     }
 

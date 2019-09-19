@@ -10,9 +10,11 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/rootView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:context=".ui.main.MainActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -30,8 +32,7 @@
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".main.MainActivity">
+            android:layout_height="match_parent">
 
             <FrameLayout
                 android:id="@+id/contentFrame"
@@ -44,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:layout_margin="@dimen/fab_margin"
+                android:onClick="@{() -> viewModel.onClickFab()}"
                 app:srcCompat="@android:drawable/ic_dialog_email" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
