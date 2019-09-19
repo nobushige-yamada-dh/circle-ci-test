@@ -27,7 +27,8 @@ class MainViewModelTest {
         val mainViewModel = MainViewModel(appRepository)
         val observer = mock<Observer<MainViewModel.Message>>()
         mainViewModel.snackBarMessage.observeForever(observer)
-        assertEquals(MainViewModel.Message.NO_MESSAGE, mainViewModel.snackBarMessage)
+        assertEquals(MainViewModel.Message.NO_MESSAGE, mainViewModel.snackBarMessage.value)
+        clearInvocations(observer)
         mainViewModel.onClickFab()
         verify(observer).onChanged(MainViewModel.Message.FAB_PUSHED)
     }
