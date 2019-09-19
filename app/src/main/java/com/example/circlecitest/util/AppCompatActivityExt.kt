@@ -19,7 +19,6 @@ package com.example.circlecitest.util
  * Various extension functions for AppCompatActivity.
  */
 
-import android.app.Activity
 import androidx.annotation.IdRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
