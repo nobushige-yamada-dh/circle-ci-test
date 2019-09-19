@@ -5,10 +5,12 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.example.circlecitest.data.source.AppRepositoryImpl
-import com.example.circlecitest.data.source.local.LocalDataSourceImpl
+import com.example.circlecitest.data.source.local.LocalDataSource
 import com.example.circlecitest.di.AppModule
 import com.example.circlecitest.di.DaggerAppComponent
 import com.example.circlecitest.ui.main.MainActivity
+
+import org.mockito.Mockito.*
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -33,10 +35,10 @@ class ExampleInstrumentedTest {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         val app = appContext.applicationContext as MyApplication
+        val localDataSource = mock(LocalDataSource::class.java)
         val appComponent = DaggerAppComponent.builder().application(app)
             .appModule(object : AppModule() {
-                override fun provideRepository(app: MyApplication) = AppRepositoryImpl.getInstance(
-                    LocalDataSourceImpl.getInstance(app)).apply { name = "injected" }
+                override fun provideRepository(app: MyApplication) = AppRepositoryImpl.getInstance(localDataSource)
             })
             .build()
         app.appComponent = appComponent

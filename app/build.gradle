@@ -81,7 +81,13 @@ dependencies {
 
 // Mockito
 dependencies {
-    testImplementation 'org.mockito:mockito-core:1.10.19'
+    def mockito_version = '1.10.19'
+    def dexmaker_version = '1.2'
+
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    androidTestImplementation "org.mockito:mockito-core:$mockito_version"
+    androidTestImplementation "com.google.dexmaker:dexmaker:$dexmaker_version"
+    androidTestImplementation "com.google.dexmaker:dexmaker-mockito:$dexmaker_version"
 }
 
 // Lifecycle

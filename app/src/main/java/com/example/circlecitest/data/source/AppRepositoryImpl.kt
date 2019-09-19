@@ -16,8 +16,6 @@ class AppRepositoryImpl private constructor(
         private val localDataSource: LocalDataSource
 ): AppRepository {
 
-    var name = "me"
-
     override fun getAllGameApps(callback: (List<GameApp>) -> Unit) = localDataSource.getAllGameApps(callback)
 
     companion object {
