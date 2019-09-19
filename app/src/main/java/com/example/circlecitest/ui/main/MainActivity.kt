@@ -11,6 +11,8 @@ import com.example.circlecitest.MyApplication
 import com.example.circlecitest.R
 import com.example.circlecitest.ui.ViewModelFactory
 import com.example.circlecitest.databinding.ActivityMainBinding
+import com.example.circlecitest.util.obtainViewModel
+import com.example.circlecitest.util.replaceFragmentInActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -27,16 +29,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, ViewModelFactory.getInstance(application as MyApplication))
-            .get(MainViewModel::class.java)
+        viewModel = obtainViewModel()
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         binding.viewModel = viewModel
         setSupportActionBar(toolbar)
+        setupViewFragment()
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+    }
+
+    private fun setupViewFragment() {
+        supportFragmentManager.findFragmentById(R.id.contentFrame)
+            ?: replaceFragmentInActivity(MainFragment.newInstance(), R.id.contentFrame)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -54,4 +61,6 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    fun obtainViewModel(): MainViewModel = obtainViewModel(MainViewModel::class.java)
 }
