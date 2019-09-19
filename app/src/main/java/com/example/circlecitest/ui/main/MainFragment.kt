@@ -9,7 +9,7 @@ import com.example.circlecitest.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
 
-    lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
