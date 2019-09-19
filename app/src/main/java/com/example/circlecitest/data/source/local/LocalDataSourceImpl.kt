@@ -5,6 +5,8 @@ import com.example.circlecitest.data.GameApp
 import com.example.circlecitest.util.AppExecutors
 
 /**
+ * WARNING:
+ * !!! IMPORTANT !!!
  * This is an implementation of database access.
  * This class MUST be kept simple, it SHOULD NOT include logic.
  * The logic SHOULD be written in AppRepositoryImpl.
