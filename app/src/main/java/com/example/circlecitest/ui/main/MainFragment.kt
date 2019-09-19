@@ -15,9 +15,8 @@ class MainFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         viewModel = (activity as MainActivity).obtainViewModel()
-        val binding = FragmentMainBinding.inflate(inflater, container, false).apply {
-            viewModel = this@MainFragment.viewModel
-        }
+        val binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding.viewModel = viewModel
         return binding.root
     }
 
