@@ -9,7 +9,7 @@ class LocalDataSourceImpl private constructor(
 ): LocalDataSource {
 
     private val appExecutors = AppExecutors.getInstance()
-    private val mainDb = MainDatabase.getInstance(app)
+    private val mainDb = AppDatabase.getInstance(app)
 
     override fun getAllGameApps(callback: (List<GameApp>) -> Unit) {
         appExecutors.diskIO.execute {
@@ -26,11 +26,10 @@ class LocalDataSourceImpl private constructor(
         @Volatile private var INSTANCE: LocalDataSourceImpl? = null
 
         fun getInstance(app: MyApplication) =
-            INSTANCE ?: synchronized(LocalDataSourceImpl::class.java) {
-                INSTANCE ?:
-                    LocalDataSourceImpl(app).also {
+                INSTANCE ?: synchronized(LocalDataSourceImpl::class.java) {
+                    INSTANCE ?: LocalDataSourceImpl(app).also {
                         INSTANCE = it
                     }
-            }
+                }
     }
 }

@@ -7,21 +7,20 @@ import com.example.circlecitest.MyApplication
 import com.example.circlecitest.data.GameApp
 
 @Database(entities = arrayOf(GameApp::class), version = 1, exportSchema = false)
-abstract class MainDatabase: RoomDatabase() {
+abstract class AppDatabase: RoomDatabase() {
 
     abstract fun gameAppsDao(): GameAppsDao
 
     companion object {
 
-        @Volatile private var INSTANCE: MainDatabase? = null
+        @Volatile private var INSTANCE: AppDatabase? = null
 
         fun getInstance(app: MyApplication) =
-            INSTANCE ?: synchronized(MainDatabase::class.java) {
-                INSTANCE ?:
-                    Room.databaseBuilder(app, MainDatabase::class.java, "main.db")
-                        .build().also {
-                            INSTANCE = it
-                        }
-            }
+                INSTANCE ?: synchronized(AppDatabase::class.java) {
+                    INSTANCE ?: Room.databaseBuilder(app, AppDatabase::class.java, "app.db")
+                            .build().also {
+                                INSTANCE = it
+                            }
+                }
     }
 }

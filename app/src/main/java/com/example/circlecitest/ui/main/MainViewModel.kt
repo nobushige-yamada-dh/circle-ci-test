@@ -1,7 +1,7 @@
 package com.example.circlecitest.ui.main
 
 import androidx.lifecycle.ViewModel
-import com.example.circlecitest.data.source.MainRepository
+import com.example.circlecitest.data.source.AppRepository
 
 /**
  * This is an implementation of all logic of MainActivity and MainFragment.
@@ -10,6 +10,6 @@ import com.example.circlecitest.data.source.MainRepository
  * You MUST keep it.
  */
 class MainViewModel(
-    private val mainRepository: MainRepository
+        private val appRepository: AppRepository
 ) : ViewModel() {
 }

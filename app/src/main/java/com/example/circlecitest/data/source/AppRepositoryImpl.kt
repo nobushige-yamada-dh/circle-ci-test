@@ -10,22 +10,21 @@ import com.example.circlecitest.data.source.local.LocalDataSource
  * This class (business logic) can test by Unit Test with mock easily, without Android and I/O.
  * You MUST keep it.
  */
-class MainRepositoryImpl private constructor(
+class AppRepositoryImpl private constructor(
         private val localDataSource: LocalDataSource
-): MainRepository {
+): AppRepository {
 
     var name = "me"
 
     companion object {
 
-        @Volatile private var INSTANCE: MainRepositoryImpl? = null
+        @Volatile private var INSTANCE: AppRepositoryImpl? = null
 
         fun getInstance(localDataSource: LocalDataSource) =
-            INSTANCE ?: synchronized(MainRepositoryImpl::class.java) {
-                INSTANCE ?:
-                    MainRepositoryImpl(localDataSource).also {
+                INSTANCE ?: synchronized(AppRepositoryImpl::class.java) {
+                    INSTANCE ?: AppRepositoryImpl(localDataSource).also {
                         INSTANCE = it
                     }
-            }
+                }
     }
 }

@@ -5,7 +5,7 @@ import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.circlecitest.MyApplication
-import com.example.circlecitest.data.source.MainRepository
+import com.example.circlecitest.data.source.AppRepository
 import com.example.circlecitest.ui.main.MainViewModel
 import javax.inject.Inject
 
@@ -13,10 +13,10 @@ import javax.inject.Inject
  *
  */
 class ViewModelFactory private constructor(
-    private val app: MyApplication
+        private val app: MyApplication
 ) : ViewModelProvider.NewInstanceFactory() {
 
-    @Inject lateinit var mainRepository: MainRepository
+    @Inject lateinit var appRepository: AppRepository
 
     init {
         app.appComponent.inject(this)
@@ -26,7 +26,7 @@ class ViewModelFactory private constructor(
             with(modelClass) {
                 when {
                     isAssignableFrom(MainViewModel::class.java) ->
-                        MainViewModel(mainRepository)
+                        MainViewModel(appRepository)
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }

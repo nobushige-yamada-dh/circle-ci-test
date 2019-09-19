@@ -4,8 +4,7 @@ import android.content.Intent
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
-import com.example.circlecitest.data.source.MainRepository
-import com.example.circlecitest.data.source.MainRepositoryImpl
+import com.example.circlecitest.data.source.AppRepositoryImpl
 import com.example.circlecitest.data.source.local.LocalDataSourceImpl
 import com.example.circlecitest.di.AppModule
 import com.example.circlecitest.di.DaggerAppComponent
@@ -36,7 +35,7 @@ class ExampleInstrumentedTest {
         val app = appContext.applicationContext as MyApplication
         val appComponent = DaggerAppComponent.builder().application(app)
             .appModule(object : AppModule() {
-                override fun provideRepository(app: MyApplication) = MainRepositoryImpl.getInstance(
+                override fun provideRepository(app: MyApplication) = AppRepositoryImpl.getInstance(
                     LocalDataSourceImpl.getInstance(app)).apply { name = "injected" }
             })
             .build()
