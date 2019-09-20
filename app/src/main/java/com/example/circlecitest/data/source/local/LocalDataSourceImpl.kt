@@ -1,8 +1,6 @@
 package com.example.circlecitest.data.source.local
 
 import com.example.circlecitest.MyApplication
-import com.example.circlecitest.data.GameApp
-import com.example.circlecitest.util.AppExecutors
 
 /**
  * WARNING:
