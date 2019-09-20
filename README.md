@@ -25,18 +25,18 @@ Maybe something wrong.
 Here is what is called the *Model*, I think.  
 These packages include business logic and datasource access.
 
-### `<app-package>.data`
+#### `<app-package>.data`
 
 The entities are placed here. These have some annotations of [`Room`](https://developer.android.com/jetpack/androidx/releases/room).
 
-### `<app-package>.data.source`
+#### `<app-package>.data.source`
 
-#### `AppRepository`
+##### `AppRepository`
 
 The interface of `Repository`.
 You can create mock from this when you testing.
 
-#### `AppRepositoryImpl`
+##### `AppRepositoryImpl`
 
 This is an implementation of business logic.
 
@@ -49,13 +49,13 @@ Of cource, it does not mean that all business logics must be written in one file
 You SHOULD sepalete classes and files properly. Huge classes or files are NOT recommended.
 All classes belonging to `Repository` MUST NOT include code of I/O, and these MUST be written by **Pure Java(Kotlin)**, and they MUST NOT have any indivisual referrences to/from `View` group classes, only `AppRepository` is an interface to/from other groups.
 
-### `<app-package>.data.source.local`
+#### `<app-package>.data.source.local`
 
 This is an implementation of database access using [`Room`](https://developer.android.com/jetpack/androidx/releases/room).
 This class MUST be kept simple, it SHOULD NOT include any logics.
 The logic SHOULD be written in `Repository`.
 
-#### `LocalDataSource`
+##### `LocalDataSource`
 
 The interface of local datasource access.
 When you test the repository or the app, you can create mock from this interface.

@@ -3,6 +3,7 @@ package com.example.circlecitest.data.source
 import androidx.annotation.VisibleForTesting
 import com.example.circlecitest.data.GameApp
 import com.example.circlecitest.data.source.local.LocalDataSource
+import java.util.concurrent.Executors
 
 /**
  * WARNING:
@@ -18,7 +19,18 @@ class AppRepositoryImpl private constructor(
         private val localDataSource: LocalDataSource
 ): AppRepository {
 
-    override fun getAllGameApps(callback: (List<GameApp>) -> Unit) = localDataSource.getAllGameApps(callback)
+    private val diskAccessExecutor = Executors.newSingleThreadExecutor()
+    private val resultExecutor = Executors.newSingleThreadExecutor()
+
+    override fun getAllGameApps(callback: (List<GameApp>) -> Unit) {
+        diskAccessExecutor.execute {
+            localDataSource.getAllGameApps().also {
+                resultExecutor.execute {
+                    callback(it)
+                }
+            }
+        }
+    }
 
     companion object {
 

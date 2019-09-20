@@ -4,5 +4,5 @@ import com.example.circlecitest.data.GameApp
 
 interface LocalDataSource {
 
-    fun getAllGameApps(callback: (List<GameApp>) -> Unit)
+    fun getAllGameApps(): List<GameApp>
 }

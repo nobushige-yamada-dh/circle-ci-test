@@ -2,10 +2,10 @@ package com.example.circlecitest.data.source
 
 import com.example.circlecitest.data.GameApp
 import com.example.circlecitest.data.source.local.LocalDataSource
+import com.nhaarman.mockitokotlin2.*
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Test
-import org.mockito.Mockito.*
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.thread
@@ -23,12 +23,8 @@ class AppRepositoryImplTest {
         val lock = ReentrantLock()
         val condition = lock.newCondition()
         val gameApps = listOf(GameApp(1, "app1"))
-        val appRepositoryImpl = AppRepositoryImpl.getInstance(object : LocalDataSource by mock(LocalDataSource::class.java) {
-            override fun getAllGameApps(callback: (List<GameApp>) -> Unit) {
-                thread {
-                    callback(gameApps)
-                }
-            }
+        val appRepositoryImpl = AppRepositoryImpl.getInstance(object : LocalDataSource by mock<LocalDataSource>() {
+            override fun getAllGameApps() = gameApps
         })
         lock.withLock {
             var result: List<GameApp>? = null
