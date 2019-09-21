@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.circlecitest.util
+package com.example.circlecitest.ui
 
 /**
  * Various extension functions for AppCompatActivity.
@@ -28,7 +28,6 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import com.example.circlecitest.MyApplication
-import com.example.circlecitest.ui.ViewModelFactory
 
 
 /**

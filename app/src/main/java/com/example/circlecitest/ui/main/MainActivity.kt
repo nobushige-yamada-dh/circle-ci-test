@@ -8,8 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.circlecitest.R
 import com.example.circlecitest.databinding.ActivityMainBinding
-import com.example.circlecitest.util.obtainViewModel
-import com.example.circlecitest.util.replaceFragmentInActivity
+import com.example.circlecitest.ui.obtainViewModel
+import com.example.circlecitest.ui.replaceFragmentInActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
