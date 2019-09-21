@@ -23,8 +23,12 @@ class AppRepositoryImpl private constructor(
     private val resultExecutor = Executors.newSingleThreadExecutor()
 
     override fun getAllGameApps(callback: (List<GameApp>) -> Unit) {
+        withDisk({ localDataSource.getAllGameApps() }, callback)
+    }
+
+    private fun <T : Any> withDisk(funcProc: () -> T, callback: (T) -> Unit) {
         diskAccessExecutor.execute {
-            localDataSource.getAllGameApps().also {
+            funcProc().also {
                 resultExecutor.execute {
                     callback(it)
                 }
