@@ -8,7 +8,6 @@ import org.junit.Assert.*
 import org.junit.Test
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.locks.ReentrantLock
-import kotlin.concurrent.thread
 import kotlin.concurrent.withLock
 
 class AppRepositoryImplTest {
@@ -23,9 +22,10 @@ class AppRepositoryImplTest {
         val lock = ReentrantLock()
         val condition = lock.newCondition()
         val gameApps = listOf(GameApp(1, "app1"))
-        val appRepositoryImpl = AppRepositoryImpl.getInstance(object : LocalDataSource by mock<LocalDataSource>() {
-            override fun getAllGameApps() = gameApps
-        })
+        val appRepositoryImpl =
+                AppRepositoryImpl.getInstance(object : LocalDataSource by mock<LocalDataSource>() {
+                    override fun getAllGameApps() = gameApps
+                })
         lock.withLock {
             var result: List<GameApp>? = null
             appRepositoryImpl.getAllGameApps {
