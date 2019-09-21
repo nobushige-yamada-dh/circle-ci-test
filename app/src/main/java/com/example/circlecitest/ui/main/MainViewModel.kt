@@ -1,6 +1,5 @@
 package com.example.circlecitest.ui.main
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.circlecitest.data.source.AppRepository

@@ -17,5 +17,5 @@ open class AppModule {
     @Singleton
     @Provides
     open fun provideRepository(app: MyApplication): AppRepository =
-        AppRepositoryImpl.getInstance(LocalDataSourceImpl.getInstance(app))
+            AppRepositoryImpl.getInstance(LocalDataSourceImpl.getInstance(app))
 }

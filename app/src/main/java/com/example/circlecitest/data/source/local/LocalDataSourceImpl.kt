@@ -11,7 +11,7 @@ import com.example.circlecitest.MyApplication
  */
 class LocalDataSourceImpl private constructor(
         private val app: MyApplication
-): LocalDataSource {
+) : LocalDataSource {
 
     private val appDb = AppDatabase.getInstance(app)
 
@@ -19,7 +19,8 @@ class LocalDataSourceImpl private constructor(
 
     companion object {
 
-        @Volatile private var INSTANCE: LocalDataSourceImpl? = null
+        @Volatile
+        private var INSTANCE: LocalDataSourceImpl? = null
 
         fun getInstance(app: MyApplication) =
                 INSTANCE ?: synchronized(LocalDataSourceImpl::class.java) {

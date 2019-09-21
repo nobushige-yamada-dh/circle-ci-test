@@ -17,7 +17,7 @@ import java.util.concurrent.Executors
  */
 class AppRepositoryImpl private constructor(
         private val localDataSource: LocalDataSource
-): AppRepository {
+) : AppRepository {
 
     private val diskAccessExecutor = Executors.newSingleThreadExecutor()
     private val resultExecutor = Executors.newSingleThreadExecutor()
@@ -34,7 +34,8 @@ class AppRepositoryImpl private constructor(
 
     companion object {
 
-        @Volatile private var INSTANCE: AppRepositoryImpl? = null
+        @Volatile
+        private var INSTANCE: AppRepositoryImpl? = null
 
         fun getInstance(localDataSource: LocalDataSource) =
                 INSTANCE ?: synchronized(AppRepositoryImpl::class.java) {

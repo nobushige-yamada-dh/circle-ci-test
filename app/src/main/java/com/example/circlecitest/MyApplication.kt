@@ -17,11 +17,11 @@ class MyApplication : Application() {
         super.onCreate()
 
         appComponent = DaggerAppComponent.builder().application(this)
-            .build()
+                .build()
     }
 
     /**
-     * 
+     *
      */
     fun forCyclomaticComplexity(a: Int): Int {
         if (a == 1) {

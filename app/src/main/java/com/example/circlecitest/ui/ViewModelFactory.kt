@@ -16,7 +16,8 @@ class ViewModelFactory private constructor(
         private val app: MyApplication
 ) : ViewModelProvider.NewInstanceFactory() {
 
-    @Inject lateinit var appRepository: AppRepository
+    @Inject
+    lateinit var appRepository: AppRepository
 
     init {
         app.appComponent.inject(this)
@@ -35,7 +36,8 @@ class ViewModelFactory private constructor(
     companion object {
 
         @SuppressLint("StaticFieldLeak")
-        @Volatile private var INSTANCE: ViewModelFactory? = null
+        @Volatile
+        private var INSTANCE: ViewModelFactory? = null
 
         fun getInstance(app: MyApplication) =
                 INSTANCE ?: synchronized(ViewModelFactory::class.java) {
@@ -44,7 +46,8 @@ class ViewModelFactory private constructor(
                     }
                 }
 
-        @VisibleForTesting fun destroyInstance() {
+        @VisibleForTesting
+        fun destroyInstance() {
             INSTANCE = null
         }
     }

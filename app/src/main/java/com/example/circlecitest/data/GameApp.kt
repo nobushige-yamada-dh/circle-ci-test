@@ -7,5 +7,4 @@ import androidx.room.PrimaryKey
 data class GameApp constructor(
         @PrimaryKey(autoGenerate = true) val id: Long = 0,
         var name: String
-) {
-}
+)

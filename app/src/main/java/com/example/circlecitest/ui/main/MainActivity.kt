@@ -1,20 +1,16 @@
 package com.example.circlecitest.ui.main
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import com.example.circlecitest.MyApplication
 import com.example.circlecitest.R
-import com.example.circlecitest.ui.ViewModelFactory
 import com.example.circlecitest.databinding.ActivityMainBinding
 import com.example.circlecitest.util.obtainViewModel
 import com.example.circlecitest.util.replaceFragmentInActivity
-
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -31,7 +27,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = obtainViewModel()
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        val binding =
+                DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         binding.viewModel = viewModel
         setSupportActionBar(toolbar)
         setupViewFragment()
@@ -48,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViewFragment() {
         supportFragmentManager.findFragmentById(R.id.contentFrame)
-            ?: replaceFragmentInActivity(MainFragment.newInstance(), R.id.contentFrame)
+                ?: replaceFragmentInActivity(MainFragment.newInstance(), R.id.contentFrame)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
