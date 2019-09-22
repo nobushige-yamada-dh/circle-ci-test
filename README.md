@@ -22,14 +22,18 @@ Maybe something wrong.
 
 ### `<app-package>.data.**`
 
-Here is what is called the *Model*, I think.  
+Here is what is called the *Model*.  
 These packages include business logic and datasource access.
 
 #### `<app-package>.data`
 
+***Written In PURE Java(Kotlin)***
+
 The entities are placed here. These have some annotations of [`Room`](https://developer.android.com/jetpack/androidx/releases/room).
 
 #### `<app-package>.data.source`
+
+***Written In PURE Java(Kotlin)***
 
 ##### `AppRepository`
 
@@ -51,6 +55,8 @@ All classes belonging to `Repository` MUST NOT include code of I/O, and these MU
 
 #### `<app-package>.data.source.local`
 
+***Written In DIRTY Java(Kotlin)***
+
 This is an implementation of database access using [`Room`](https://developer.android.com/jetpack/androidx/releases/room).
 This class MUST be kept simple, it SHOULD NOT include any logics.
 The logic SHOULD be written in `Repository`.
@@ -61,3 +67,41 @@ The interface of local datasource access.
 When you test the repository or the app, you can create mock from this interface.
 You can create the mock with **Pure Java(Kotlin)**. It means that you can test `Repository` by UnitTest without Android.
 It is useful for testing a delay response too.
+
+### `<app-package>.di.**`
+
+***Written In DIRTY Java(Kotlin)***
+
+This is an implementation for injection(Dagger2).
+
+### `<app-package>.ui.**`
+
+Here is what is called the *View and ViewModel*.
+
+#### `<app-package>.ui`
+
+***Written In DIRTY Java(Kotlin)***
+
+Common classes or functions for views.
+
+#### `<app-package>.ui.<view-name>`
+
+This is an implementation for view and view model of `<view-name>`.
+
+##### `<view-name>ViewModel`
+
+***Written In PURE Java(Kotlin)***
+
+This is an implementation of all logic of `<view-name>Activity` and `<view-name>Fragment`.
+You MUST NOT write code depends on Android, except `LiveData` and `ViewModel`.
+This class (all logic about view) can test by Unit Test with mock easily, without Android device or emulator.
+
+Of cource, it does not mean that all view logics must be written in one file.
+You SHOULD sepalete classes and files properly. Huge classes or files are NOT recommended.
+All classes belonging to `ViewGroup` MUST be written by **Pure Java(Kotlin)**.
+
+##### `<view-name>Activity`, `<view-name>Fragment`, and its layout files
+
+***Written In DIRTY Java(Kotlin)***
+
+These are the surfaces and the designs of each views. These implementations SHOULD NOT include any logics, except the procedures depend on Android.
