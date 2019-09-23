@@ -1,7 +1,9 @@
 package com.example.circlecitest.ui.main
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.circlecitest.data.GameApp
 import com.example.circlecitest.data.source.AppRepository
 
 /**
@@ -22,6 +24,10 @@ class MainViewModel(
     }
 
     val snackBarMessage = MutableLiveData<Message>(Message.NO_MESSAGE)
+
+    private val _items = MutableLiveData<List<GameApp>>()
+    val items: LiveData<List<GameApp>>
+        get() = _items
 
     fun doSomething(): String = "Did something"
 
