@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.circlecitest.data.GameApp
 import com.example.circlecitest.data.source.AppRepository
+import java.util.ArrayList
 
 /**
  * WARNING:
@@ -25,9 +26,21 @@ class MainViewModel(
 
     val snackBarMessage = MutableLiveData<Message>(Message.NO_MESSAGE)
 
-    private val _items = MutableLiveData<List<GameApp>>()
+    private val _items = MutableLiveData<List<GameApp>>(ArrayList(0))
     val items: LiveData<List<GameApp>>
         get() = _items
+
+    init {
+        _items.value = arrayListOf(
+                GameApp(1, "first game"),
+                GameApp(2, "second game"),
+                GameApp(3, "third game"),
+                GameApp(4, "fourth game"),
+                GameApp(5, "fifth game"),
+                GameApp(6, "6th game"),
+                GameApp(99, "last game")
+        )
+    }
 
     fun doSomething(): String = "Did something"
 

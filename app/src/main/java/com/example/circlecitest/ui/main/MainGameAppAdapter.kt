@@ -1,15 +1,13 @@
 package com.example.circlecitest.ui.main
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
-import com.example.circlecitest.data.GameApp
 import com.example.circlecitest.databinding.ItemMainGameAppBinding
-import java.util.ArrayList
 
 class MainGameAppAdapter(
-        context: Context,
+        fragment: MainFragment,
         private val viewModel: MainViewModel
 ) : RecyclerView.Adapter<MainGameAppAdapter.ViewHolder>() {
 
@@ -17,13 +15,13 @@ class MainGameAppAdapter(
             val binding: ItemMainGameAppBinding
     ) : RecyclerView.ViewHolder(binding.root)
 
-    private val layoutInflater = LayoutInflater.from(context)
+    private val layoutInflater = LayoutInflater.from(fragment.context)
 
-    var gameAppList: List<GameApp> = ArrayList(0)
-        set(value) {
-            field = value
+    init {
+        viewModel.items.observe(fragment, Observer {
             notifyDataSetChanged()
-        }
+        })
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemMainGameAppBinding.inflate(layoutInflater, parent, false)
@@ -32,8 +30,8 @@ class MainGameAppAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.gameApp = gameAppList[position]
+        holder.binding.gameApp = viewModel.items.value?.get(position)
     }
 
-    override fun getItemCount() = gameAppList.size
+    override fun getItemCount() = viewModel.items.value?.size ?: 0
 }
