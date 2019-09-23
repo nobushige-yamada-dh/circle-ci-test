@@ -42,7 +42,13 @@ class MainViewModel(
         )
     }
 
+    val clickedGameApp = MutableLiveData<GameApp>()
+
     fun doSomething(): String = "Did something"
+
+    fun onClickGameApp(gameApp: GameApp) {
+        clickedGameApp.value = gameApp
+    }
 
     fun onClickFab() {
         snackBarMessage.value = Message.FAB_PUSHED

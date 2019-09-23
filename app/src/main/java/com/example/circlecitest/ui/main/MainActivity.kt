@@ -41,6 +41,14 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
+        viewModel.clickedGameApp.apply {
+            observe(this@MainActivity, Observer {
+                it?.also {
+                    value = null
+                    Snackbar.make(fab, "Launch ${it.name}!", Snackbar.LENGTH_LONG).show()
+                }
+            })
+        }
     }
 
     private fun setupViewFragment() {
