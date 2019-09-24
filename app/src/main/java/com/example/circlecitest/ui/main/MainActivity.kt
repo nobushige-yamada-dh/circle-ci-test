@@ -51,6 +51,14 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
+        viewModel.launchScreen.apply {
+            observe(this@MainActivity, Observer {
+                it?.also {
+                    value = null
+                    Snackbar.make(fab, "Launch ${it.name} screen!", Snackbar.LENGTH_LONG).show()
+                }
+            })
+        }
     }
 
     private fun setupViewFragment() {
@@ -69,7 +77,14 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_add -> {
+                viewModel.onClickAdd()
+                return true
+            }
+            R.id.action_help -> {
+                viewModel.onClickHelp()
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

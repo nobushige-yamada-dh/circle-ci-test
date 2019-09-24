@@ -19,6 +19,14 @@ class MainViewModel(
         private val appRepository: AppRepository
 ) : ViewModel() {
 
+    enum class LaunchScreen {
+        NONE,
+        REGISTER,
+        HELP
+    }
+
+    val launchScreen = MutableLiveData<LaunchScreen>(LaunchScreen.NONE)
+
     enum class Message {
         NO_MESSAGE,
         FAB_PUSHED
@@ -48,6 +56,14 @@ class MainViewModel(
 
     fun onClickGameApp(gameApp: GameApp) {
         clickedGameApp.value = gameApp
+    }
+
+    fun onClickAdd() {
+        launchScreen.value = LaunchScreen.REGISTER
+    }
+
+    fun onClickHelp() {
+        launchScreen.value = LaunchScreen.HELP
     }
 
     fun onClickFab() {
