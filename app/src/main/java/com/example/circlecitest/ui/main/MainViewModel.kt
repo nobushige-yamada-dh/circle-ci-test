@@ -50,12 +50,12 @@ class MainViewModel(
         )
     }
 
-    val clickedGameApp = MutableLiveData<GameApp>()
+    val launchGameApp = MutableLiveData<GameApp>()
 
     fun doSomething(): String = "Did something"
 
     fun onClickGameApp(gameApp: GameApp) {
-        clickedGameApp.value = gameApp
+        launchGameApp.value = gameApp
     }
 
     fun onClickAdd() {

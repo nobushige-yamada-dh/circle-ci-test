@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
-        viewModel.clickedGameApp.apply {
+        viewModel.launchGameApp.apply {
             observe(this@MainActivity, Observer {
                 it?.also {
                     value = null
