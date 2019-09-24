@@ -27,7 +27,7 @@ class MainViewModelTest {
         val appRepository = mock<AppRepository>()
         val mainViewModel = MainViewModel(appRepository)
         val observer = mock<Observer<GameApp>>()
-        val gameApp = GameApp(1, "game name")
+        val gameApp = GameApp(1, "app1", "game app")
         mainViewModel.launchGameApp.observeForever(observer)
         assertEquals(null, mainViewModel.launchGameApp.value)
         clearInvocations(observer)
@@ -36,6 +36,7 @@ class MainViewModelTest {
 
         verify(observer).onChanged(check {
             assertEquals(gameApp.id, it.id)
+            assertEquals(gameApp.applicationId, it.applicationId)
             assertEquals(gameApp.name, it.name)
         })
     }

@@ -38,13 +38,13 @@ class MainViewModel(
 
     init {
         _items.value = arrayListOf(
-                GameApp(1, "first game"),
-                GameApp(2, "second game"),
-                GameApp(3, "third game"),
-                GameApp(4, "fourth game"),
-                GameApp(5, "fifth game"),
-                GameApp(6, "6th game"),
-                GameApp(99, "last game")
+                GameApp(1, "app1","first game"),
+                GameApp(2, "app2","second game"),
+                GameApp(3, "app3","third game"),
+                GameApp(4, "app4","fourth game"),
+                GameApp(5, "app5","fifth game"),
+                GameApp(6, "app6","6th game"),
+                GameApp(99, "app99","last game")
         )
     }
 

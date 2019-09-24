@@ -21,7 +21,7 @@ class AppRepositoryImplTest {
     fun testGetAllGameApps() {
         val lock = ReentrantLock()
         val condition = lock.newCondition()
-        val gameApps = listOf(GameApp(1, "app1"))
+        val gameApps = listOf(GameApp(1, "app1", "app1"))
         val appRepositoryImpl =
                 AppRepositoryImpl.getInstance(object : LocalDataSource by mock<LocalDataSource>() {
                     override fun getAllGameApps() = gameApps
