@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.circlecitest.R
 import com.example.circlecitest.databinding.ActivityMainBinding
+import com.example.circlecitest.ui.observe
 import com.example.circlecitest.ui.obtainViewModel
 import com.example.circlecitest.ui.replaceFragmentInActivity
 import com.google.android.material.snackbar.Snackbar
@@ -33,31 +34,14 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         setupViewFragment()
 
-        viewModel.snackBarMessage.apply {
-            observe(this@MainActivity, Observer {
-                it?.also {
-                    if (it != MainViewModel.Message.NO_MESSAGE) {
-                        value = MainViewModel.Message.NO_MESSAGE
-                        Snackbar.make(fab, it.name, Snackbar.LENGTH_LONG).show()
-                    }
-                }
-            })
+        observe(viewModel.snackBarMessage) {
+            Snackbar.make(fab, it.name, Snackbar.LENGTH_LONG).show()
         }
-        viewModel.launchGameApp.apply {
-            observe(this@MainActivity, Observer {
-                it?.also {
-                    value = null
-                    Snackbar.make(fab, "Launch ${it.name}!", Snackbar.LENGTH_LONG).show()
-                }
-            })
+        observe(viewModel.launchGameApp) {
+            Snackbar.make(fab, "Launch ${it.name}!", Snackbar.LENGTH_LONG).show()
         }
-        viewModel.launchScreen.apply {
-            observe(this@MainActivity, Observer {
-                it?.also {
-                    value = null
-                    Snackbar.make(fab, "Launch ${it.name} screen!", Snackbar.LENGTH_LONG).show()
-                }
-            })
+        observe(viewModel.launchScreen) {
+            Snackbar.make(fab, "Launch ${it.name} screen!", Snackbar.LENGTH_LONG).show()
         }
     }
 

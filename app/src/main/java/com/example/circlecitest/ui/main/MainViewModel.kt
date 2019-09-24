@@ -20,19 +20,17 @@ class MainViewModel(
 ) : ViewModel() {
 
     enum class LaunchScreen {
-        NONE,
         REGISTER,
         HELP
     }
 
-    val launchScreen = MutableLiveData<LaunchScreen>(LaunchScreen.NONE)
+    val launchScreen = MutableLiveData<LaunchScreen>()
 
     enum class Message {
-        NO_MESSAGE,
         FAB_PUSHED
     }
 
-    val snackBarMessage = MutableLiveData<Message>(Message.NO_MESSAGE)
+    val snackBarMessage = MutableLiveData<Message>()
 
     private val _items = MutableLiveData<List<GameApp>>(ArrayList(0))
     val items: LiveData<List<GameApp>>
