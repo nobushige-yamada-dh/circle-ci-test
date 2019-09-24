@@ -35,9 +35,11 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.snackBarMessage.apply {
             observe(this@MainActivity, Observer {
-                if (it != MainViewModel.Message.NO_MESSAGE) {
-                    value = MainViewModel.Message.NO_MESSAGE
-                    Snackbar.make(fab, it.name, Snackbar.LENGTH_LONG).show()
+                it?.also {
+                    if (it != MainViewModel.Message.NO_MESSAGE) {
+                        value = MainViewModel.Message.NO_MESSAGE
+                        Snackbar.make(fab, it.name, Snackbar.LENGTH_LONG).show()
+                    }
                 }
             })
         }
