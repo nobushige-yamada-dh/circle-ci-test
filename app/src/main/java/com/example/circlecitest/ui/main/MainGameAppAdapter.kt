@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.circlecitest.databinding.ItemMainGameAppBinding
 
 class MainGameAppAdapter(
-        fragment: MainFragment,
+        private val fragment: MainFragment,
         private val viewModel: MainViewModel
 ) : RecyclerView.Adapter<MainGameAppAdapter.ViewHolder>() {
 
@@ -25,6 +25,7 @@ class MainGameAppAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemMainGameAppBinding.inflate(layoutInflater, parent, false)
+        binding.pm = fragment.context!!.packageManager
         binding.viewModel = viewModel
         return ViewHolder(binding)
     }

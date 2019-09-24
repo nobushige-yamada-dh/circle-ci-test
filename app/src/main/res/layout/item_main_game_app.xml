@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="pm"
+            type="android.content.pm.PackageManager" />
         <variable
             name="viewModel"
             type="com.example.circlecitest.ui.main.MainViewModel" />
-
         <variable
             name="gameApp"
             type="com.example.circlecitest.data.GameApp" />
