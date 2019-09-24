@@ -5,13 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 
 
-fun <T : Any> AppCompatActivity.observe(liveData: MutableLiveData<T>, callback: (newValue: T) -> Unit) {
-    liveData.apply {
-        observe(this@observe, Observer {
-            it?.also {
-                value = null
-                callback(it)
-            }
-        })
-    }
+fun <T : Any> AppCompatActivity.observe(
+        liveData: MutableLiveData<T>,
+        callback: (newValue: T) -> Unit
+) {
+    liveData.observe(this, Observer {
+        it?.also {
+            liveData.value = null
+            callback(it)
+        }
+    })
 }
