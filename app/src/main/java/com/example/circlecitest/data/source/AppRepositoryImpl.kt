@@ -36,6 +36,8 @@ class AppRepositoryImpl private constructor(
         }, callback)
     }
 
+    override fun getInstalledApplications() = localDataSource.getInstalledApplications()
+
     private fun <T : Any> withDisk(funcProc: () -> T, callback: (T) -> Unit) {
         diskAccessExecutor.execute {
             funcProc().also {

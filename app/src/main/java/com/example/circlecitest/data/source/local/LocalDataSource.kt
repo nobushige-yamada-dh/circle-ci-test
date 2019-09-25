@@ -6,4 +6,5 @@ interface LocalDataSource {
 
     fun getAllGameApps(): List<GameApp>
     fun isInstalled(applicationId: String): Boolean
+    fun getInstalledApplications(): List<GameApp>
 }

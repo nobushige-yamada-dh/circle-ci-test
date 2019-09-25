@@ -2,6 +2,7 @@ package com.example.circlecitest.data.source.local
 
 import android.content.pm.PackageManager
 import com.example.circlecitest.MyApplication
+import com.example.circlecitest.data.GameApp
 
 /**
  * WARNING:
@@ -25,6 +26,13 @@ class LocalDataSourceImpl private constructor(
         } catch (e: PackageManager.NameNotFoundException) {
             return false
         }
+    }
+
+    override fun getInstalledApplications(): List<GameApp> {
+        val pm = app.packageManager
+        return pm.getInstalledApplications(0)
+                .map { GameApp(0, it.packageName, it.loadLabel(pm).toString()) }
+                .toList()
     }
 
     companion object {
