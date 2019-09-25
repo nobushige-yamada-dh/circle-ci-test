@@ -25,6 +25,7 @@ class AppRepositoryImplTest {
         val appRepositoryImpl =
                 AppRepositoryImpl.getInstance(object : LocalDataSource by mock<LocalDataSource>() {
                     override fun getAllGameApps() = gameApps
+                    override fun isInstalled(applicationId: String) = true
                 })
         lock.withLock {
             var result: List<GameApp>? = null

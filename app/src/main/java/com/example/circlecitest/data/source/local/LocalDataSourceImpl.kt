@@ -1,5 +1,6 @@
 package com.example.circlecitest.data.source.local
 
+import android.content.pm.PackageManager
 import com.example.circlecitest.MyApplication
 
 /**
@@ -16,6 +17,15 @@ class LocalDataSourceImpl private constructor(
     private val appDb = AppDatabase.getInstance(app)
 
     override fun getAllGameApps() = appDb.gameAppsDao().getAll()
+
+    override fun isInstalled(applicationId: String): Boolean {
+        try {
+            app.packageManager.getApplicationInfo(applicationId, 0)
+            return true
+        } catch (e: PackageManager.NameNotFoundException) {
+            return false
+        }
+    }
 
     companion object {
 

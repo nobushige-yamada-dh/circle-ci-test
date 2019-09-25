@@ -3,6 +3,7 @@ package com.example.circlecitest.data.source
 import androidx.annotation.VisibleForTesting
 import com.example.circlecitest.data.GameApp
 import com.example.circlecitest.data.source.local.LocalDataSource
+import java.util.LinkedList
 import java.util.concurrent.Executors
 
 /**
@@ -23,7 +24,16 @@ class AppRepositoryImpl private constructor(
     private val resultExecutor = Executors.newSingleThreadExecutor()
 
     override fun getAllGameApps(callback: (List<GameApp>) -> Unit) {
-        withDisk({ localDataSource.getAllGameApps() }, callback)
+        withDisk({
+            val gameApps = localDataSource.getAllGameApps()
+            val actualGameApps = LinkedList(gameApps)
+            gameApps.forEach {
+                if (!localDataSource.isInstalled(it.applicationId)) {
+                    actualGameApps.remove(it)
+                }
+            }
+            actualGameApps
+        }, callback)
     }
 
     private fun <T : Any> withDisk(funcProc: () -> T, callback: (T) -> Unit) {
