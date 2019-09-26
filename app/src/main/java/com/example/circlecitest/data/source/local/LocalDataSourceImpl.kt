@@ -19,6 +19,9 @@ class LocalDataSourceImpl private constructor(
 
     override fun getAllGameApps() = appDb.gameAppsDao().getAll()
 
+    override fun getGameAppsByApplicationId(applicationId: String) =
+            appDb.gameAppsDao().getByApplicationId(applicationId)
+
     override fun isInstalled(applicationId: String): Boolean {
         try {
             app.packageManager.getApplicationInfo(applicationId, 0)

@@ -17,6 +17,9 @@ interface GameAppsDao {
     @Query("SELECT * FROM game_apps")
     fun getAll(): List<GameApp>
 
+    @Query("SELECT * FROM game_apps WHERE application_id = :applicationId")
+    fun getByApplicationId(applicationId: String): List<GameApp>
+
     @Update
     fun update(gameApp: GameApp): Int
 

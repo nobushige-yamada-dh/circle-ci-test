@@ -3,7 +3,6 @@ package com.example.circlecitest.data.source
 import androidx.annotation.VisibleForTesting
 import com.example.circlecitest.data.GameApp
 import com.example.circlecitest.data.source.local.LocalDataSource
-import java.util.LinkedList
 import java.util.concurrent.Executors
 
 /**
@@ -26,6 +25,17 @@ class AppRepositoryImpl private constructor(
     override fun getAllGameApps(callback: (List<GameApp>) -> Unit) {
         withDisk({
             localDataSource.getAllGameApps()
+                    .filter { localDataSource.isInstalled(it.applicationId) }
+                    .toList()
+        }, callback)
+    }
+
+    override fun getGameAppsByApplicationId(
+            applicationId: String,
+            callback: (List<GameApp>) -> Unit
+    ) {
+        withDisk({
+            localDataSource.getGameAppsByApplicationId(applicationId)
                     .filter { localDataSource.isInstalled(it.applicationId) }
                     .toList()
         }, callback)

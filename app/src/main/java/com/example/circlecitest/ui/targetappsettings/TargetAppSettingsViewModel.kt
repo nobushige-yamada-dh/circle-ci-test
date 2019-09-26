@@ -29,4 +29,10 @@ class TargetAppSettingsViewModel(
     private val _items = MutableLiveData<List<Item>>(ArrayList(0))
     val items: LiveData<List<Item>>
         get() = _items
+
+    fun onStart() {
+        appExecutors.diskIoExecutor.execute {
+            appRepository.getInstalledApplications()
+        }
+    }
 }
