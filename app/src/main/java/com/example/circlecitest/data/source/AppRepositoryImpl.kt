@@ -25,14 +25,9 @@ class AppRepositoryImpl private constructor(
 
     override fun getAllGameApps(callback: (List<GameApp>) -> Unit) {
         withDisk({
-            val gameApps = localDataSource.getAllGameApps()
-            val actualGameApps = LinkedList(gameApps)
-            gameApps.forEach {
-                if (!localDataSource.isInstalled(it.applicationId)) {
-                    actualGameApps.remove(it)
-                }
-            }
-            actualGameApps
+            localDataSource.getAllGameApps()
+                    .filter { localDataSource.isInstalled(it.applicationId) }
+                    .toList()
         }, callback)
     }
 
