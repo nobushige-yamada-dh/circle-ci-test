@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.circlecitest.data.GameApp
+import com.example.circlecitest.data.source.AppExecutors
 import com.example.circlecitest.data.source.AppRepository
 import java.util.ArrayList
 import java.util.concurrent.Executor
@@ -17,7 +18,8 @@ import java.util.concurrent.Executor
  * You MUST keep it.
  */
 class TargetAppSettingsViewModel(
-        private val appRepository: AppRepository
+        private val appRepository: AppRepository,
+        private val appExecutors: AppExecutors
 ) : ViewModel() {
 
     class Item(val gameApp: GameApp, isChecked: Boolean) {
