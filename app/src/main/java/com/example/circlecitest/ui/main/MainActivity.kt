@@ -1,16 +1,17 @@
 package com.example.circlecitest.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import com.example.circlecitest.R
 import com.example.circlecitest.databinding.ActivityMainBinding
 import com.example.circlecitest.ui.observe
 import com.example.circlecitest.ui.obtainViewModel
 import com.example.circlecitest.ui.replaceFragmentInActivity
+import com.example.circlecitest.ui.targetappsettings.TargetAppSettingsActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -41,7 +42,14 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(fab, "Launch ${it.name}!", Snackbar.LENGTH_LONG).show()
         }
         observe(viewModel.launchScreen) {
-            Snackbar.make(fab, "Launch ${it.name} screen!", Snackbar.LENGTH_LONG).show()
+            when (it) {
+                MainViewModel.LaunchScreen.REGISTER -> {
+                    startActivity(Intent(application, TargetAppSettingsActivity::class.java))
+                }
+                else -> {
+                    Snackbar.make(fab, "Launch ${it.name} screen!", Snackbar.LENGTH_LONG).show()
+                }
+            }
         }
     }
 

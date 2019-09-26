@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.circlecitest.MyApplication
 import com.example.circlecitest.data.source.AppRepository
 import com.example.circlecitest.ui.main.MainViewModel
+import com.example.circlecitest.ui.targetappsettings.TargetAppSettingsViewModel
 import javax.inject.Inject
 
 /**
@@ -28,6 +29,8 @@ class ViewModelFactory private constructor(
                 when {
                     isAssignableFrom(MainViewModel::class.java) ->
                         MainViewModel(appRepository)
+                    isAssignableFrom(TargetAppSettingsViewModel::class.java) ->
+                        TargetAppSettingsViewModel(appRepository)
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }
