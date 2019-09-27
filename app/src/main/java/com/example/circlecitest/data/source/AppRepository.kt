@@ -8,7 +8,7 @@ import com.example.circlecitest.data.GameApp
  */
 interface AppRepository {
 
-    fun getAllGameApps(callback: (List<GameApp>) -> Unit)
-    fun getGameAppsByApplicationId(applicationId: String, callback: (List<GameApp>) -> Unit)
+    suspend fun getAllGameApps(): List<GameApp>
+    suspend fun getGameAppsByApplicationId(applicationId: String): List<GameApp>
     fun getInstalledApplications(): List<GameApp>
 }

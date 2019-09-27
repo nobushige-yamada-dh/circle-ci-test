@@ -3,6 +3,8 @@ package com.example.circlecitest.data.source
 import androidx.annotation.VisibleForTesting
 import com.example.circlecitest.data.GameApp
 import com.example.circlecitest.data.source.local.LocalDataSource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.util.concurrent.Executors
 
 /**
@@ -19,39 +21,23 @@ class AppRepositoryImpl private constructor(
         private val localDataSource: LocalDataSource
 ) : AppRepository {
 
-    private val diskAccessExecutor = Executors.newSingleThreadExecutor()
-    private val resultExecutor = Executors.newSingleThreadExecutor()
-
-    override fun getAllGameApps(callback: (List<GameApp>) -> Unit) {
-        withDisk({
+    override suspend fun getAllGameApps(): List<GameApp> {
+        return withContext(Dispatchers.IO) {
             localDataSource.getAllGameApps()
                     .filter { localDataSource.isInstalled(it.applicationId) }
                     .toList()
-        }, callback)
+        }
     }
 
-    override fun getGameAppsByApplicationId(
-            applicationId: String,
-            callback: (List<GameApp>) -> Unit
-    ) {
-        withDisk({
+    override suspend fun getGameAppsByApplicationId(applicationId: String): List<GameApp> {
+        return withContext(Dispatchers.IO) {
             localDataSource.getGameAppsByApplicationId(applicationId)
                     .filter { localDataSource.isInstalled(it.applicationId) }
                     .toList()
-        }, callback)
+        }
     }
 
     override fun getInstalledApplications() = localDataSource.getInstalledApplications()
-
-    private fun <T : Any> withDisk(funcProc: () -> T, callback: (T) -> Unit) {
-        diskAccessExecutor.execute {
-            funcProc().also {
-                resultExecutor.execute {
-                    callback(it)
-                }
-            }
-        }
-    }
 
     companion object {
 
