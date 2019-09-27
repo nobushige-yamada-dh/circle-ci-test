@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.circlecitest.databinding.FragmentMainBinding
+import com.example.circlecitest.ui.BaseFragment
 
-class MainFragment : Fragment() {
+class MainFragment : BaseFragment() {
 
     private lateinit var viewDataBinding: FragmentMainBinding
     private lateinit var viewModel: MainViewModel

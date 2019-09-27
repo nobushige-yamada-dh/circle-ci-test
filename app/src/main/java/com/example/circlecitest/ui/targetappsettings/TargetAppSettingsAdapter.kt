@@ -9,8 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.circlecitest.R
 import com.example.circlecitest.databinding.ItemTargetAppSettingsTargetAppBinding
-import com.example.circlecitest.ui.MainThreadExecutor
-import java.util.concurrent.Executors
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class TargetAppSettingsAdapter(
         private val fragment: TargetAppSettingsFragment,
@@ -24,8 +25,6 @@ class TargetAppSettingsAdapter(
         val iconImageView = itemView.findViewById<ImageView>(R.id.icon)!!
     }
 
-    private val bgExecutor = Executors.newSingleThreadExecutor()
-    private val uiExecutor = MainThreadExecutor()
     private val layoutInflater = LayoutInflater.from(fragment.context)
     private val packageManager = fragment.context!!.packageManager
 
@@ -50,9 +49,11 @@ class TargetAppSettingsAdapter(
             try {
                 val appInfo = packageManager.getApplicationInfo(it.gameApp.applicationId, 0)
                 holder.nameTextView.text = appInfo.loadLabel(packageManager)
-                bgExecutor.execute {
-                    val icon = packageManager.getApplicationIcon(appInfo)
-                    uiExecutor.execute {
+                fragment.launch {
+                    val icon = withContext(Dispatchers.Default) {
+                        packageManager.getApplicationIcon(appInfo)
+                    }
+                    withContext(Dispatchers.Main) {
                         if (holder.adapterPosition == position) {
                             holder.iconImageView.setImageDrawable(icon)
                         }
