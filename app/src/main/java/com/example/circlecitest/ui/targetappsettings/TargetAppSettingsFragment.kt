@@ -21,6 +21,7 @@ class TargetAppSettingsFragment : Fragment() {
         viewModel = (activity as TargetAppSettingsActivity).obtainViewModel()
         viewDataBinding = FragmentTargetAppSettingsBinding.inflate(inflater, container, false)
         viewDataBinding.viewModel = viewModel
+        viewModel.onStart()
         return viewDataBinding.root
     }
 

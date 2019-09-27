@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.circlecitest.R
 import com.example.circlecitest.databinding.ActivityTargetAppSettingsBinding
 import com.example.circlecitest.ui.obtainViewModel
+import com.example.circlecitest.ui.replaceFragmentInActivity
 import kotlinx.android.synthetic.main.activity_target_app_settings.*
 
 /**
@@ -28,6 +29,12 @@ class TargetAppSettingsActivity : AppCompatActivity() {
         )
         binding.viewModel = viewModel
         setSupportActionBar(toolbar)
+        setupViewFragment()
+    }
+
+    private fun setupViewFragment() {
+        supportFragmentManager.findFragmentById(R.id.contentFrame)
+                ?: replaceFragmentInActivity(TargetAppSettingsFragment.newInstance(), R.id.contentFrame)
     }
 
     fun obtainViewModel(): TargetAppSettingsViewModel =

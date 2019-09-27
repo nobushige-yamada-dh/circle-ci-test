@@ -30,7 +30,7 @@ class ViewModelFactory private constructor(
                     isAssignableFrom(MainViewModel::class.java) ->
                         MainViewModel(appRepository)
                     isAssignableFrom(TargetAppSettingsViewModel::class.java) ->
-                        TargetAppSettingsViewModel(appRepository, app.appExecutors)
+                        TargetAppSettingsViewModel(appRepository)
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }
