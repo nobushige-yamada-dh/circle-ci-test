@@ -5,7 +5,6 @@ import com.example.circlecitest.data.GameApp
 import com.example.circlecitest.data.source.local.LocalDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.util.concurrent.Executors
 
 /**
  * WARNING:
@@ -34,6 +33,18 @@ class AppRepositoryImpl private constructor(
             localDataSource.getGameAppsByApplicationId(applicationId)
                     .filter { localDataSource.isInstalled(it.applicationId) }
                     .toList()
+        }
+    }
+
+    override suspend fun insertGameAppIfNotExists(gameApp: GameApp): Long {
+        return withContext(Dispatchers.IO) {
+            localDataSource.insertGameAppIfNotExists(gameApp)
+        }
+    }
+
+    override suspend fun deleteGameApp(gameApp: GameApp): Int {
+        return withContext(Dispatchers.IO) {
+            localDataSource.deleteGameApp(gameApp)
         }
     }
 

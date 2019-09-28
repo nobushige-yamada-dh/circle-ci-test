@@ -22,6 +22,11 @@ class LocalDataSourceImpl private constructor(
     override fun getGameAppsByApplicationId(applicationId: String) =
             appDb.gameAppsDao().getByApplicationId(applicationId)
 
+    override fun insertGameAppIfNotExists(gameApp: GameApp) =
+            appDb.gameAppsDao().insertIfNotExists(gameApp)
+
+    override fun deleteGameApp(gameApp: GameApp) = appDb.gameAppsDao().delete(gameApp)
+
     override fun isInstalled(applicationId: String): Boolean {
         try {
             app.packageManager.getApplicationInfo(applicationId, 0)

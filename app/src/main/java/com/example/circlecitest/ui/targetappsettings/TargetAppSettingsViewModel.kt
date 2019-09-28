@@ -21,11 +21,19 @@ class TargetAppSettingsViewModel(
         private val appRepository: AppRepository
 ) : ViewModel() {
 
-    class Item(val gameApp: GameApp, initChecked: Boolean) {
+    inner class Item(val gameApp: GameApp, initChecked: Boolean) {
         val isChecked = MutableLiveData(initChecked).also {
             it.observeForever() {
                 it?.also {
-                    println("name:${gameApp.name} -> $it")
+                    viewModelScope.launch {
+                        if (it) {
+                            val res = appRepository.insertGameAppIfNotExists(gameApp)
+                            println("insert: $res")
+                        } else {
+                            val res = appRepository.deleteGameApp(gameApp)
+                            println("delete: $res")
+                        }
+                    }
                 }
             }
         }

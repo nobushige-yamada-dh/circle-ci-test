@@ -10,5 +10,7 @@ interface AppRepository {
 
     suspend fun getAllGameApps(): List<GameApp>
     suspend fun getGameAppsByApplicationId(applicationId: String): List<GameApp>
+    suspend fun insertGameAppIfNotExists(gameApp: GameApp): Long
+    suspend fun deleteGameApp(gameApp: GameApp): Int
     fun getInstalledApplications(): List<GameApp>
 }
