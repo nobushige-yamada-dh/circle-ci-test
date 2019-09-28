@@ -2,10 +2,8 @@ package com.example.circlecitest
 
 import android.app.Application
 import androidx.annotation.VisibleForTesting
-import com.example.circlecitest.data.source.AppExecutors
 import com.example.circlecitest.di.AppComponent
 import com.example.circlecitest.di.DaggerAppComponent
-import com.example.circlecitest.ui.MainThreadExecutor
 
 /**
  *
@@ -15,15 +13,11 @@ class MyApplication : Application() {
     lateinit var appComponent: AppComponent
         @VisibleForTesting set
 
-    lateinit var appExecutors: AppExecutors
-        private set
-
     override fun onCreate() {
         super.onCreate()
 
         appComponent = DaggerAppComponent.builder().application(this)
                 .build()
-        appExecutors = AppExecutors(MainThreadExecutor())
     }
 
     /**
