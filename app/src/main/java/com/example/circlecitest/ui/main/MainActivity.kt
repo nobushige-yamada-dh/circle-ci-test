@@ -38,9 +38,6 @@ class MainActivity : AppCompatActivity() {
         observe(viewModel.snackBarMessage) {
             Snackbar.make(rootView, it.name, Snackbar.LENGTH_LONG).show()
         }
-        observe(viewModel.launchGameApp) {
-            Snackbar.make(rootView, "Launch ${it.name}!", Snackbar.LENGTH_LONG).show()
-        }
         observe(viewModel.launchScreen) {
             when (it) {
                 MainViewModel.LaunchScreen.REGISTER -> {

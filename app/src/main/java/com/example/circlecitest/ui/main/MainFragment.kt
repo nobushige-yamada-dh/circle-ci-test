@@ -11,7 +11,6 @@ class MainFragment : BaseFragment() {
 
     private lateinit var viewDataBinding: FragmentMainBinding
     private lateinit var viewModel: MainViewModel
-    private lateinit var mainGameAppAdapter: MainGameAppAdapter
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -27,11 +26,6 @@ class MainFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewDataBinding.lifecycleOwner = viewLifecycleOwner
-        mainGameAppAdapter = MainGameAppAdapter(this, viewModel)
-        viewDataBinding.gameItems.also {
-            it.setHasFixedSize(true)
-            it.adapter = mainGameAppAdapter
-        }
     }
 
     companion object {

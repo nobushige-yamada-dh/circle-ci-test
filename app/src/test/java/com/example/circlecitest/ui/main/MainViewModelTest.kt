@@ -2,7 +2,6 @@ package com.example.circlecitest.ui.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.example.circlecitest.data.GameApp
 import com.example.circlecitest.data.source.AppRepository
 import com.nhaarman.mockitokotlin2.*
 import org.junit.Assert.*
@@ -14,32 +13,6 @@ class MainViewModelTest {
 
     @get:Rule
     val rule: TestRule = InstantTaskExecutorRule()
-
-    @Test
-    fun testDoSomething() {
-        val appRepository = mock<AppRepository>()
-        val mainViewModel = MainViewModel(appRepository)
-        assertEquals("Did something", mainViewModel.doSomething())
-    }
-
-    @Test
-    fun testOnClickGameApp() {
-        val appRepository = mock<AppRepository>()
-        val mainViewModel = MainViewModel(appRepository)
-        val observer = mock<Observer<GameApp>>()
-        val gameApp = GameApp(1, "app1", "game app")
-        mainViewModel.launchGameApp.observeForever(observer)
-        assertEquals(null, mainViewModel.launchGameApp.value)
-        clearInvocations(observer)
-
-        mainViewModel.onClickGameApp(gameApp)
-
-        verify(observer).onChanged(check {
-            assertEquals(gameApp.id, it.id)
-            assertEquals(gameApp.applicationId, it.applicationId)
-            assertEquals(gameApp.name, it.name)
-        })
-    }
 
     @Test
     fun testOnClickAdd() {

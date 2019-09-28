@@ -1,11 +1,8 @@
 package com.example.circlecitest.ui.main
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.circlecitest.data.GameApp
 import com.example.circlecitest.data.source.AppRepository
-import java.util.ArrayList
 
 /**
  * WARNING:
@@ -31,30 +28,6 @@ class MainViewModel(
     }
 
     val snackBarMessage = MutableLiveData<Message>()
-
-    private val _items = MutableLiveData<List<GameApp>>(ArrayList(0))
-    val items: LiveData<List<GameApp>>
-        get() = _items
-
-    init {
-        _items.value = arrayListOf(
-                GameApp(1, "app1", "first game"),
-                GameApp(2, "app2", "second game"),
-                GameApp(3, "app3", "third game"),
-                GameApp(4, "app4", "fourth game"),
-                GameApp(5, "app5", "fifth game"),
-                GameApp(6, "app6", "6th game"),
-                GameApp(99, "app99", "last game")
-        )
-    }
-
-    val launchGameApp = MutableLiveData<GameApp>()
-
-    fun doSomething(): String = "Did something"
-
-    fun onClickGameApp(gameApp: GameApp) {
-        launchGameApp.value = gameApp
-    }
 
     fun onClickAdd() {
         launchScreen.value = LaunchScreen.REGISTER
