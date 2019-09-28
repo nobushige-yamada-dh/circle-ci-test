@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
         indices = arrayOf(Index(value = ["application_id"]))
 )
 data class GameApp(
-        @PrimaryKey(autoGenerate = true) val id: Long = 0,
+        @PrimaryKey(autoGenerate = true) var id: Long = 0,
         @ColumnInfo(name = "application_id") var applicationId: String,
         var name: String
 )

@@ -48,7 +48,19 @@ class AppRepositoryImpl private constructor(
         }
     }
 
-    override fun getInstalledApplications() = localDataSource.getInstalledApplications()
+    override suspend fun getInstalledApplications(): List<GameApp> {
+        return withContext(Dispatchers.IO) {
+            localDataSource.getInstalledApplications()
+                    .map {
+                        val gameApps = localDataSource.getGameAppsByApplicationId(it.applicationId)
+                        if (gameApps.isEmpty()) {
+                            return@map GameApp(0, it.applicationId, it.name)
+                        }
+                        gameApps[0]
+                    }
+                    .toList()
+        }
+    }
 
     companion object {
 

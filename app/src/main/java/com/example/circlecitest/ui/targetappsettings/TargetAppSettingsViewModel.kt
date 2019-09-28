@@ -27,11 +27,14 @@ class TargetAppSettingsViewModel(
                 it?.also {
                     viewModelScope.launch {
                         if (it) {
-                            val res = appRepository.insertGameAppIfNotExists(gameApp)
-                            println("insert: $res")
+                            val id = appRepository.insertGameAppIfNotExists(gameApp)
+                            if (id > 0) {
+                                gameApp.id = id
+                            }
                         } else {
-                            val res = appRepository.deleteGameApp(gameApp)
-                            println("delete: $res")
+                            if (appRepository.deleteGameApp(gameApp) > 0) {
+                                gameApp.id = 0
+                            }
                         }
                     }
                 }

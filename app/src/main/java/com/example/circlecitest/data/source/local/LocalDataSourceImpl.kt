@@ -36,10 +36,10 @@ class LocalDataSourceImpl private constructor(
         }
     }
 
-    override fun getInstalledApplications(): List<GameApp> {
+    override fun getInstalledApplications(): List<LocalDataSource.AppInfo> {
         val pm = app.packageManager
         return pm.getInstalledApplications(0)
-                .map { GameApp(0, it.packageName, it.loadLabel(pm).toString()) }
+                .map { LocalDataSource.AppInfo(it.packageName, it.loadLabel(pm).toString()) }
                 .toList()
     }
 
