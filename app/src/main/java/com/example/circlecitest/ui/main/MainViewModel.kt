@@ -36,4 +36,8 @@ class MainViewModel(
     fun onClickHelp() {
         launchScreen.value = LaunchScreen.HELP
     }
+
+    fun onClickTargetAppSettings() {
+        launchScreen.value = LaunchScreen.REGISTER
+    }
 }
