@@ -36,10 +36,10 @@ class MainActivity : AppCompatActivity() {
         setupViewFragment()
 
         observe(viewModel.snackBarMessage) {
-            Snackbar.make(fab, it.name, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(rootView, it.name, Snackbar.LENGTH_LONG).show()
         }
         observe(viewModel.launchGameApp) {
-            Snackbar.make(fab, "Launch ${it.name}!", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(rootView, "Launch ${it.name}!", Snackbar.LENGTH_LONG).show()
         }
         observe(viewModel.launchScreen) {
             when (it) {
@@ -47,7 +47,8 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(application, TargetAppSettingsActivity::class.java))
                 }
                 else -> {
-                    Snackbar.make(fab, "Launch ${it.name} screen!", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(rootView, "Launch ${it.name} screen!", Snackbar.LENGTH_LONG)
+                            .show()
                 }
             }
         }

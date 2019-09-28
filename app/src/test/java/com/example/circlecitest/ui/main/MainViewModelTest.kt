@@ -68,18 +68,4 @@ class MainViewModelTest {
 
         verify(observer).onChanged(MainViewModel.LaunchScreen.HELP)
     }
-
-    @Test
-    fun testOnClickFab() {
-        val appRepository = mock<AppRepository>()
-        val mainViewModel = MainViewModel(appRepository)
-        val observer = mock<Observer<MainViewModel.Message>>()
-        mainViewModel.snackBarMessage.observeForever(observer)
-        assertEquals(null, mainViewModel.snackBarMessage.value)
-        clearInvocations(observer)
-
-        mainViewModel.onClickFab()
-
-        verify(observer).onChanged(MainViewModel.Message.FAB_PUSHED)
-    }
 }
