@@ -21,8 +21,14 @@ class TargetAppSettingsViewModel(
         private val appRepository: AppRepository
 ) : ViewModel() {
 
-    class Item(val gameApp: GameApp, isChecked: Boolean) {
-        val isChecked = MutableLiveData(isChecked)
+    class Item(val gameApp: GameApp, initChecked: Boolean) {
+        val isChecked = MutableLiveData(initChecked).also {
+            it.observeForever() {
+                it?.also {
+                    println("name:${gameApp.name} -> $it")
+                }
+            }
+        }
     }
 
     private val _items = MutableLiveData<List<Item>>(ArrayList(0))

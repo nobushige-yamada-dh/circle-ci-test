@@ -41,7 +41,7 @@
             android:id="@+id/is_checked"
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:checked="@{item.isChecked}"
+            android:checked="@={item.isChecked}"
             android:showText="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
