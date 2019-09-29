@@ -18,8 +18,8 @@ class LocalDataSourceImpl private constructor(
 
     override fun getAllGameApps() = appDb.gameAppsDao().getAll()
 
-    override fun getGameAppsByApplicationId(applicationId: String) =
-            appDb.gameAppsDao().getByApplicationId(applicationId)
+    override fun getGameAppsByApplicationIdAndClassName(applicationId: String, className: String) =
+            appDb.gameAppsDao().getByApplicationIdAndClassName(applicationId, className)
 
     override fun insertGameAppIfNotExists(gameApp: GameApp) =
             appDb.gameAppsDao().insertIfNotExists(gameApp)

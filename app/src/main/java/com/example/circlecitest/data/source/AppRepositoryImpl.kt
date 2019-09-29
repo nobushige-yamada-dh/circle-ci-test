@@ -30,11 +30,12 @@ class AppRepositoryImpl private constructor(
         }
     }
 
-    override suspend fun getGameAppsByApplicationId(applicationId: String): List<GameApp> {
+    override suspend fun getGameAppsByApplicationIdAndClassName(
+            applicationId: String,
+            className: String
+    ): GameApp {
         return withContext(Dispatchers.IO) {
-            localDataSource.getGameAppsByApplicationId(applicationId)
-                    .filter { osDataSource.isAvailable(it.applicationId, it.className) }
-                    .toList()
+            localDataSource.getGameAppsByApplicationIdAndClassName(applicationId, className)
         }
     }
 
@@ -54,11 +55,13 @@ class AppRepositoryImpl private constructor(
         return withContext(Dispatchers.IO) {
             osDataSource.getInstalledApplications()
                     .map {
-                        val gameApps = localDataSource.getGameAppsByApplicationId(it.applicationId)
-                        if (gameApps.isEmpty()) {
-                            return@map GameApp(0, it.applicationId, it.className)
+                        localDataSource.getGameAppsByApplicationIdAndClassName(
+                                it.applicationId,
+                                it.className
+                        )?.also {
+                            return@map it
                         }
-                        gameApps[0]
+                        GameApp(0, it.applicationId, it.className)
                     }
                     .toList()
         }

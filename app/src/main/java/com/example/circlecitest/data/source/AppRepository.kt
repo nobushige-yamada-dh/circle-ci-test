@@ -9,7 +9,11 @@ import com.example.circlecitest.data.GameApp
 interface AppRepository {
 
     suspend fun getAllGameApps(): List<GameApp>
-    suspend fun getGameAppsByApplicationId(applicationId: String): List<GameApp>
+    suspend fun getGameAppsByApplicationIdAndClassName(
+            applicationId: String,
+            className: String
+    ): GameApp
+
     suspend fun insertGameAppIfNotExists(gameApp: GameApp): Long
     suspend fun deleteGameApp(gameApp: GameApp): Int
     suspend fun getInstalledApplications(): List<GameApp>

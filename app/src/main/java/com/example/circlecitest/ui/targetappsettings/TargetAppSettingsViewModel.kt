@@ -23,7 +23,7 @@ class TargetAppSettingsViewModel(
 
     inner class Item(val gameApp: GameApp, initChecked: Boolean) {
         val isChecked = MutableLiveData(initChecked).also {
-            it.observeForever() {
+            it.observeForever {
                 it?.also {
                     viewModelScope.launch {
                         if (it) {
@@ -52,7 +52,10 @@ class TargetAppSettingsViewModel(
                     .map {
                         Item(
                                 it,
-                                appRepository.getGameAppsByApplicationId(it.applicationId).isNotEmpty()
+                                appRepository.getGameAppsByApplicationIdAndClassName(
+                                        it.applicationId,
+                                        it.className
+                                ) != null
                         )
                     }
                     .toList())
