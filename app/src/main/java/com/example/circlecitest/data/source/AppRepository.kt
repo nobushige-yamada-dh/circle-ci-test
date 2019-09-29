@@ -12,7 +12,7 @@ interface AppRepository {
     suspend fun getGameAppsByApplicationIdAndClassName(
             applicationId: String,
             className: String
-    ): GameApp
+    ): GameApp?
 
     suspend fun insertGameAppIfNotExists(gameApp: GameApp): Long
     suspend fun deleteGameApp(gameApp: GameApp): Int

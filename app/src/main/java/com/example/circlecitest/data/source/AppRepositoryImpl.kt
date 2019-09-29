@@ -33,7 +33,7 @@ class AppRepositoryImpl private constructor(
     override suspend fun getGameAppsByApplicationIdAndClassName(
             applicationId: String,
             className: String
-    ): GameApp {
+    ): GameApp? {
         return withContext(Dispatchers.IO) {
             localDataSource.getGameAppsByApplicationIdAndClassName(applicationId, className)
         }
