@@ -1,5 +1,6 @@
 package com.example.circlecitest.ui.targetappsettings
 
+import android.content.ComponentName
 import android.content.pm.PackageManager
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -47,11 +48,12 @@ class TargetAppSettingsAdapter(
         holder.iconImageView.setImageDrawable(null)
         item?.also {
             try {
-                val appInfo = packageManager.getApplicationInfo(it.gameApp.applicationId, 0)
-                holder.nameTextView.text = appInfo.loadLabel(packageManager)
+                val componentName = ComponentName(it.gameApp.applicationId, it.gameApp.className)
+                val activityInfo = packageManager.getActivityInfo(componentName, 0)
+                holder.nameTextView.text = activityInfo.loadLabel(packageManager)
                 fragment.launch {
                     val icon = withContext(Dispatchers.Default) {
-                        packageManager.getApplicationIcon(appInfo)
+                        packageManager.getActivityIcon(componentName)
                     }
                     withContext(Dispatchers.Main) {
                         if (holder.adapterPosition == position) {
