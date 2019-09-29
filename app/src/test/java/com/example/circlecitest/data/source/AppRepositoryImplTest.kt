@@ -25,7 +25,8 @@ class AppRepositoryImplTest {
                             override fun getAllGameApps() = gameApps
                         },
                         object : OsDataSource by mock<OsDataSource>() {
-                            override fun isInstalled(applicationId: String) = true
+                            override fun isAvailable(applicationId: String, className: String) =
+                                    true
                         }
                 )
         val result = appRepositoryImpl.getAllGameApps()

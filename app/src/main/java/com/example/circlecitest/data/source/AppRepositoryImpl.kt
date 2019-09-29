@@ -25,7 +25,7 @@ class AppRepositoryImpl private constructor(
     override suspend fun getAllGameApps(): List<GameApp> {
         return withContext(Dispatchers.IO) {
             localDataSource.getAllGameApps()
-                    .filter { osDataSource.isInstalled(it.applicationId) }
+                    .filter { osDataSource.isAvailable(it.applicationId, it.className) }
                     .toList()
         }
     }
@@ -33,7 +33,7 @@ class AppRepositoryImpl private constructor(
     override suspend fun getGameAppsByApplicationId(applicationId: String): List<GameApp> {
         return withContext(Dispatchers.IO) {
             localDataSource.getGameAppsByApplicationId(applicationId)
-                    .filter { osDataSource.isInstalled(it.applicationId) }
+                    .filter { osDataSource.isAvailable(it.applicationId, it.className) }
                     .toList()
         }
     }

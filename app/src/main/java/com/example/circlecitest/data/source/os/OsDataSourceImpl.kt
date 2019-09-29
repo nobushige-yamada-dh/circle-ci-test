@@ -1,5 +1,6 @@
 package com.example.circlecitest.data.source.os
 
+import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.PackageManager
 import com.example.circlecitest.MyApplication
@@ -8,9 +9,9 @@ class OsDataSourceImpl private constructor(
         private val app: MyApplication
 ) : OsDataSource {
 
-    override fun isInstalled(applicationId: String): Boolean {
+    override fun isAvailable(applicationId: String, className: String): Boolean {
         try {
-            app.packageManager.getApplicationInfo(applicationId, 0)
+            app.packageManager.getActivityInfo(ComponentName(applicationId, className), 0)
             return true
         } catch (e: PackageManager.NameNotFoundException) {
             return false

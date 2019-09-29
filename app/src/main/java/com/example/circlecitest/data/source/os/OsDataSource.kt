@@ -4,6 +4,6 @@ interface OsDataSource {
 
     data class AppInfo(val applicationId: String, val className: String)
 
-    fun isInstalled(applicationId: String): Boolean
+    fun isAvailable(applicationId: String, className: String): Boolean
     fun getInstalledApplications(): List<AppInfo>
 }
