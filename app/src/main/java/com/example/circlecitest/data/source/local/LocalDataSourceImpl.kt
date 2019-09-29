@@ -1,5 +1,6 @@
 package com.example.circlecitest.data.source.local
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import com.example.circlecitest.MyApplication
 import com.example.circlecitest.data.GameApp
@@ -37,9 +38,13 @@ class LocalDataSourceImpl private constructor(
     }
 
     override fun getInstalledApplications(): List<LocalDataSource.AppInfo> {
-        val pm = app.packageManager
-        return pm.getInstalledApplications(0)
-                .map { LocalDataSource.AppInfo(it.packageName, it.loadLabel(pm).toString()) }
+        val intent = Intent(Intent.ACTION_MAIN).also {
+            it.addCategory(Intent.CATEGORY_LAUNCHER)
+        }
+        return app.packageManager.queryIntentActivities(intent, PackageManager.MATCH_ALL)
+                .mapNotNull { it.activityInfo }
+                .filter { it.packageName != app.packageName }
+                .map { LocalDataSource.AppInfo(it.packageName, it.name) }
                 .toList()
     }
 

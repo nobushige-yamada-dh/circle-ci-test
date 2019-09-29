@@ -54,7 +54,7 @@ class AppRepositoryImpl private constructor(
                     .map {
                         val gameApps = localDataSource.getGameAppsByApplicationId(it.applicationId)
                         if (gameApps.isEmpty()) {
-                            return@map GameApp(0, it.applicationId, it.name)
+                            return@map GameApp(0, it.applicationId, it.className)
                         }
                         gameApps[0]
                     }

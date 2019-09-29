@@ -4,7 +4,7 @@ import com.example.circlecitest.data.GameApp
 
 interface LocalDataSource {
 
-    data class AppInfo(val applicationId: String, val name: String)
+    data class AppInfo(val applicationId: String, val className: String)
 
     fun getAllGameApps(): List<GameApp>
     fun getGameAppsByApplicationId(applicationId: String): List<GameApp>

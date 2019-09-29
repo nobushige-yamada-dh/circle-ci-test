@@ -25,6 +25,6 @@ class AppRepositoryImplTest {
                 })
         val result = appRepositoryImpl.getAllGameApps()
         assertEquals(1, result.size)
-        assertEquals("app1", result[0].name)
+        assertEquals("app1", result[0].className)
     }
 }
