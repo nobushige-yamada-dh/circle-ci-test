@@ -2,6 +2,7 @@ package com.example.circlecitest.data.source
 
 import com.example.circlecitest.data.GameApp
 import com.example.circlecitest.data.source.local.LocalDataSource
+import com.example.circlecitest.data.source.os.OsDataSource
 import com.nhaarman.mockitokotlin2.*
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -19,10 +20,14 @@ class AppRepositoryImplTest {
     fun testGetAllGameApps() = runBlocking {
         val gameApps = listOf(GameApp(1, "app1", "app1"))
         val appRepositoryImpl =
-                AppRepositoryImpl.getInstance(object : LocalDataSource by mock<LocalDataSource>() {
-                    override fun getAllGameApps() = gameApps
-                    override fun isInstalled(applicationId: String) = true
-                })
+                AppRepositoryImpl.getInstance(
+                        object : LocalDataSource by mock<LocalDataSource>() {
+                            override fun getAllGameApps() = gameApps
+                        },
+                        object : OsDataSource by mock<OsDataSource>() {
+                            override fun isInstalled(applicationId: String) = true
+                        }
+                )
         val result = appRepositoryImpl.getAllGameApps()
         assertEquals(1, result.size)
         assertEquals("app1", result[0].className)

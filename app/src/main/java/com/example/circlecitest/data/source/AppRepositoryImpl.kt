@@ -3,6 +3,7 @@ package com.example.circlecitest.data.source
 import androidx.annotation.VisibleForTesting
 import com.example.circlecitest.data.GameApp
 import com.example.circlecitest.data.source.local.LocalDataSource
+import com.example.circlecitest.data.source.os.OsDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -17,13 +18,14 @@ import kotlinx.coroutines.withContext
  * You MUST keep it.
  */
 class AppRepositoryImpl private constructor(
-        private val localDataSource: LocalDataSource
+        private val localDataSource: LocalDataSource,
+        private val osDataSource: OsDataSource
 ) : AppRepository {
 
     override suspend fun getAllGameApps(): List<GameApp> {
         return withContext(Dispatchers.IO) {
             localDataSource.getAllGameApps()
-                    .filter { localDataSource.isInstalled(it.applicationId) }
+                    .filter { osDataSource.isInstalled(it.applicationId) }
                     .toList()
         }
     }
@@ -31,7 +33,7 @@ class AppRepositoryImpl private constructor(
     override suspend fun getGameAppsByApplicationId(applicationId: String): List<GameApp> {
         return withContext(Dispatchers.IO) {
             localDataSource.getGameAppsByApplicationId(applicationId)
-                    .filter { localDataSource.isInstalled(it.applicationId) }
+                    .filter { osDataSource.isInstalled(it.applicationId) }
                     .toList()
         }
     }
@@ -50,7 +52,7 @@ class AppRepositoryImpl private constructor(
 
     override suspend fun getInstalledApplications(): List<GameApp> {
         return withContext(Dispatchers.IO) {
-            localDataSource.getInstalledApplications()
+            osDataSource.getInstalledApplications()
                     .map {
                         val gameApps = localDataSource.getGameAppsByApplicationId(it.applicationId)
                         if (gameApps.isEmpty()) {
@@ -67,9 +69,9 @@ class AppRepositoryImpl private constructor(
         @Volatile
         private var INSTANCE: AppRepositoryImpl? = null
 
-        fun getInstance(localDataSource: LocalDataSource) =
+        fun getInstance(localDataSource: LocalDataSource, osDataSource: OsDataSource) =
                 INSTANCE ?: synchronized(AppRepositoryImpl::class.java) {
-                    INSTANCE ?: AppRepositoryImpl(localDataSource).also {
+                    INSTANCE ?: AppRepositoryImpl(localDataSource, osDataSource).also {
                         INSTANCE = it
                     }
                 }
