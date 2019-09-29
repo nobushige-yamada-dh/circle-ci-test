@@ -24,10 +24,7 @@ class AppRepositoryImplTest {
                         object : LocalDataSource by mock<LocalDataSource>() {
                             override fun getAllGameApps() = gameApps
                         },
-                        object : OsDataSource by mock<OsDataSource>() {
-                            override fun isAvailable(applicationId: String, className: String) =
-                                    true
-                        }
+                        mock<OsDataSource>()
                 )
         val result = appRepositoryImpl.getAllGameApps()
         assertEquals(1, result.size)

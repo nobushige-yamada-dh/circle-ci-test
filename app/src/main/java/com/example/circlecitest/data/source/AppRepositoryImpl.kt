@@ -25,8 +25,6 @@ class AppRepositoryImpl private constructor(
     override suspend fun getAllGameApps(): List<GameApp> {
         return withContext(Dispatchers.IO) {
             localDataSource.getAllGameApps()
-                    .filter { osDataSource.isAvailable(it.applicationId, it.className) }
-                    .toList()
         }
     }
 
